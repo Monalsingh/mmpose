@@ -18,7 +18,7 @@ def pose(det_model=torch.hub.load('ultralytics/yolov5', 'yolov5s'),
     Using mmdet to detect the human.
     """
     # parser = ArgumentParser()
-    pose_config = '/home/monal/mmpose/configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/coco/mobilenetv2_coco_256x192.py'
+    pose_config = '../../mmpose/configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/coco/mobilenetv2_coco_256x192.py'
     pose_checkpoint = 'https://download.openmmlab.com/mmpose/top_down/mobilenetv2/mobilenetv2_coco_256x192-d1e58e7b_20200727.pth'
     bbox_threshold = 0.3
     device = 'cuda:0'
