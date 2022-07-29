@@ -2,6 +2,7 @@
 import os
 import warnings
 from argparse import ArgumentParser
+import time
 
 import cv2
 import mmcv
@@ -138,14 +139,16 @@ def main():
     output_layer_names = None
 
     print('Running inference...')
+    t1 = time.time()
     for frame_id, cur_frame in enumerate(mmcv.track_iter_progress(video)):
         # get the detection results of current frame
         # the resulting box is (x1, y1, x2, y2)
         mmdet_results = inference_detector(det_model, cur_frame)
-
+        
         # keep the person class bounding boxes.
         person_results = process_mmdet_results(mmdet_results, args.det_cat_id)
-
+        #t2_temp = time.time()
+        
         if args.use_multi_frames:
             frames = collect_multi_frames(video, frame_id, indices,
                                           args.online)
@@ -161,7 +164,7 @@ def main():
             dataset_info=dataset_info,
             return_heatmap=return_heatmap,
             outputs=output_layer_names)
-
+	
         # show the results
         vis_frame = vis_pose_result(
             pose_model,
@@ -182,7 +185,9 @@ def main():
 
         if args.show and cv2.waitKey(1) & 0xFF == ord('q'):
             break
-
+     
+    #t2 = time.time()
+    #print(t2-t1, 1/(t2-t1))
     if save_out_video:
         videoWriter.release()
     if args.show:

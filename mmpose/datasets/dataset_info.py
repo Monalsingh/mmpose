@@ -41,7 +41,7 @@ class DatasetInfo:
             self.pose_link_color.append(self.skeleton_info[skid].get(
                 'color', [255, 128, 0]))
         self.pose_link_color = np.array(self.pose_link_color)
-
+    
     def _parse_keypoint_info(self):
         """Parse keypoint information.
 
