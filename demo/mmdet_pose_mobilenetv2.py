@@ -11,8 +11,8 @@ from mmpose.apis import (inference_top_down_pose_model,
                          init_pose_model, vis_pose_result)
 
 def pose(det_model=torch.hub.load('ultralytics/yolov5', 'yolov5s'),
-         video_path='/../../mmpose/Loading_area__2022-05-19__13-44-51__+0300.mp4',
-         video_output_path='/../../mmpose/output/'):
+         video_path='../../mmpose/Loading_area__2022-05-19__13-44-51__+0300.mp4',
+         video_output_path='../../mmpose/output/'):
     """Visualize the demo video (support both single-frame and multi-frame).
 
     Using mmdet to detect the human.
