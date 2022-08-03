@@ -52,8 +52,7 @@ def run_inference(video_path, model_name='mmpose_mobilenet_onnx', url='127.0.0.1
         input0 = tritonhttpclient.InferInput(input_name, (3, 256, 192), 'FLOAT32')
         print(input0)
 
-        output = tritonhttpclient.InferRequestedOutput(output_name,  binary_data=False)
-        print(output)
+        
         '''
         input0.reshape(1, 3, 256, 192)
         
