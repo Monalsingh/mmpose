@@ -263,9 +263,9 @@ def _inference_single_pose_model(model,
 
     # forward the model
     with torch.no_grad():
-        print(batch_data['img'])
-        print(batch_data['img_metas'])
-        print(return_heatmap)
+        print("batch_data_img"+str(batch_data['img']))
+        print("batch_data_img_metas"+str(batch_data['img_metas']))
+        print("heatmap"+str(return_heatmap))
         result = model(
             img=batch_data['img'],
             img_metas=batch_data['img_metas'],
