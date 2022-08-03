@@ -292,15 +292,17 @@ def _inference_single_pose_model(model,
         #print("heatmap"+str(return_heatmap))
         for icounter in range(0,len(batch_data['img'])):
             print(icounter)
-            input0 = tritonhttpclient.InferInput(batch_data['img'][icounter], (3, 256, 192), 'FLOAT32')
+            input=batch_data['img'][icounter]
+            input0 = tritonhttpclient.InferInput(input, (3, 256, 192), 'FLOAT32')
             print(input0)
             output = tritonhttpclient.InferRequestedOutput(output_name,  binary_data=False)
             print(output)
+            response = triton_client.infer(model_name,
+            model_version=model_version, inputs=input, outputs=output)
             logits = response.as_numpy('output')
             logits = np.asarray(logits, dtype=np.float32)
         '''
-        response = triton_client.infer(model_name,
-        model_version=model_version, inputs=input, outputs=output)
+        
         logits = response.as_numpy('output')
         print(logits)
         '''
