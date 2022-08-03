@@ -24,8 +24,8 @@ import tritongrpcclient.model_config_pb2 as mc
 import tritonhttpclient
 from tritonclientutils import triton_to_np_dtype
 from tritonclientutils import InferenceServerException
-input_name = 'input'
-output_name = 'output'
+input_name = ['input']
+output_name = ['output']
 model_name='mmpose_mobilenet_onnx'
 url='127.0.0.1:8000'
 model_version='1'
@@ -293,12 +293,12 @@ def _inference_single_pose_model(model,
         for icounter in range(0,len(batch_data['img'])):
             print(icounter)
             input=batch_data['img'][icounter]
-            input0 = tritonhttpclient.InferInput(input, (3, 256, 192), 'FLOAT32')
+            input0 = tritonhttpclient.InferInput(input_name[0], (3, 256, 192), 'FLOAT32')
             print(input0)
-            output = tritonhttpclient.InferRequestedOutput(output_name,  binary_data=False)
+            output0 = tritonhttpclient.InferRequestedOutput(output_name,  binary_data=False)
             print(output)
             response = triton_client.infer(model_name,
-            model_version=model_version, inputs=input0, outputs=output)
+            model_version=model_version, inputs=[input0], outputs=[output0])
             logits = response.as_numpy('output')
             logits = np.asarray(logits, dtype=np.float32)
         '''
