@@ -287,7 +287,7 @@ def _inference_single_pose_model(model,
 
     # forward the model
     with torch.no_grad():
-        print("batch_data_img"+str(len(batch_data['img'])))
+        print("batch_data_img"+str(batch_data['img'].shape))
         print("batch_data_img_metas"+str(batch_data['img_metas']))
         print("heatmap"+str(return_heatmap))
         #input0 = tritonhttpclient.InferInput(input_name, (3, 256, 192), 'FLOAT32')
