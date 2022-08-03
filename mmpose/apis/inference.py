@@ -18,6 +18,30 @@ from mmpose.datasets.pipelines import Compose, ToTensor
 from mmpose.models import build_posenet
 from mmpose.utils.hooks import OutputHook
 
+#--------------Triton stuff---------------------------
+import tritongrpcclient
+import tritongrpcclient.model_config_pb2 as mc
+import tritonhttpclient
+from tritonclientutils import triton_to_np_dtype
+from tritonclientutils import InferenceServerException
+input_name = 'input'
+output_name = 'output'
+model_name='mmpose_mobilenet_onnx'
+url='127.0.0.1:8000'
+model_version='1'
+VERBOSE = False
+triton_client = tritonhttpclient.InferenceServerClient(
+    url=url, verbose=VERBOSE)
+model_metadata = triton_client.get_model_metadata(
+    model_name=model_name, model_version=model_version)
+model_config = triton_client.get_model_config(
+    model_name=model_name, model_version=model_version)
+
+
+
+
+
+
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 
 
@@ -263,9 +287,17 @@ def _inference_single_pose_model(model,
 
     # forward the model
     with torch.no_grad():
-        print("batch_data_img"+str(batch_data['img']))
+        print("batch_data_img"+str(len(batch_data['img'])))
         print("batch_data_img_metas"+str(batch_data['img_metas']))
         print("heatmap"+str(return_heatmap))
+        #input0 = tritonhttpclient.InferInput(input_name, (3, 256, 192), 'FLOAT32')
+        #print(input0)
+        '''
+        response = triton_client.infer(model_name,
+        model_version=model_version, inputs=input, outputs=output)
+        logits = response.as_numpy('output')
+        print(logits)
+        '''
         result = model(
             img=batch_data['img'],
             img_metas=batch_data['img_metas'],

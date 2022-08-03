@@ -85,7 +85,7 @@ def pose(det_model=torch.hub.load('ultralytics/yolov5', 'yolov5s'),
             format='xyxy',
             return_heatmap=return_heatmap,
             outputs=output_layer_names)
-        break
+        
 
         # print("After inference top down"+str(returned_outputs))
         # print("After inference top down"+str(pose_results))
