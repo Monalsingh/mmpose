@@ -25,7 +25,7 @@ import tritonhttpclient
 from tritonclientutils import triton_to_np_dtype
 from tritonclientutils import InferenceServerException
 input_name = ['input']
-output_name = ['output']
+output_name = 'output'
 model_name='mmpose_mobilenet_onnx'
 url='127.0.0.1:8000'
 model_version='1'
