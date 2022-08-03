@@ -290,9 +290,9 @@ def _inference_single_pose_model(model,
         print("batch_data_img"+str(batch_data['img'].shape))
         #print("batch_data_img_metas"+str(batch_data['img_metas']))
         #print("heatmap"+str(return_heatmap))
-        for icounter in len(batch_data['img']):
+        for icounter in range(0,len(batch_data['img'])):
             print(icounter)
-            input0 = tritonhttpclient.InferInput(input_name, (3, 256, 192), 'FLOAT32')
+            input0 = tritonhttpclient.InferInput(batch_data['img'][icounter], (3, 256, 192), 'FLOAT32')
             print(input0)
         '''
         response = triton_client.infer(model_name,
