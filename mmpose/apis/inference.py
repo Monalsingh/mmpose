@@ -296,7 +296,7 @@ def _inference_single_pose_model(model,
             input0 = tritonhttpclient.InferInput(input_name[0], (3, 256, 192), 'FLOAT32')
             print(input0)
             output0 = tritonhttpclient.InferRequestedOutput(output_name,  binary_data=False)
-            print(output)
+            print(output0)
             response = triton_client.infer(model_name,
             model_version=model_version, inputs=[input0], outputs=[output0])
             logits = response.as_numpy('output')
