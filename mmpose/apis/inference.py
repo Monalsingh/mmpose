@@ -299,8 +299,7 @@ def _inference_single_pose_model(model,
             print(input.shape)
             input0 = tritonhttpclient.InferInput(input, (3, 256, 192), 'FLOAT32')
             print(input0)
-
-            input0.set_data_from_numpy(input0, binary_data=False)
+            input0.set_data_from_numpy(input, binary_data=False)
             print(input0)
             output0 = tritonhttpclient.InferRequestedOutput(output_name,  binary_data=False)
             print(output0)
