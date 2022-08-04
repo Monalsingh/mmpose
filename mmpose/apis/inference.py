@@ -296,6 +296,7 @@ def _inference_single_pose_model(model,
             print(input.dtype)
             input = input.cpu().detach().numpy()
             print(type(input))
+            print(input.dtype)
             print(input.shape)
             input0 = tritonhttpclient.InferInput(input, (3, 256, 192), 'FLOAT32')
             print(input0)
