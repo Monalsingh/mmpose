@@ -293,7 +293,7 @@ def _inference_single_pose_model(model,
         for icounter in range(0,len(batch_data['img'])):
             print(icounter)
             input=batch_data['img'][icounter]
-            print(input)
+            print(input.dtype)
             input = input.cpu().detach().numpy()
             print(type(input))
             print(input.shape)
