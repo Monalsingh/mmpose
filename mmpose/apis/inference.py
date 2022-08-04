@@ -293,7 +293,7 @@ def _inference_single_pose_model(model,
         for icounter in range(0,len(batch_data['img'])):
             print(icounter)
             input=batch_data['img'][icounter]
-            input0 = tritonhttpclient.InferInput(input_name[0], (3, 256, 192), 'FLOAT32')
+            input0 = tritonhttpclient.InferInput(input, (3, 256, 192), 'FLOAT32')
             print(input0)
             input0.set_data_from_numpy(input0, binary_data=False)
             print(input0)
