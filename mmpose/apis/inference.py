@@ -310,6 +310,8 @@ def _inference_single_pose_model(model,
             logits = response.as_numpy('output')
             logits = np.asarray(logits, dtype=np.float32)
             print(logits)
+            print(len(logits))
+            print(logits.shape)
         '''
         
         logits = response.as_numpy('output')
@@ -322,6 +324,7 @@ def _inference_single_pose_model(model,
             return_heatmap=return_heatmap)
         print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         print(result)
+        print(result.shape)
 
     return result['preds'], result['output_heatmap']
 
