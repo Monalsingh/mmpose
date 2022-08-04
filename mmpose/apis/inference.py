@@ -294,7 +294,7 @@ def _inference_single_pose_model(model,
             print(icounter)
             input=batch_data['img'][icounter]
             #print(input)
-            input = input.cpu().detach().numpy()
+            #input = input.cpu().detach().numpy()
             print(type(input))
             print(input.shape)
             input0 = tritonhttpclient.InferInput('input', (3, 256, 192), 'FP32')
@@ -307,11 +307,12 @@ def _inference_single_pose_model(model,
             #print(output0)
             response = triton_client.infer(model_name,
             model_version=model_version, inputs=[input0], outputs=[output0])
-            print("this is response: "+str(response))
+            #print("this is response: "+str(response))
+            # response is an tritonclient oject 
             logits = response.as_numpy('output')
             print("this is logits: "+str(logits))
-            logits = np.asarray(logits, dtype=np.float32)
-            print("this is logits after asarray: "+str(logits))
+            #logits = np.asarray(logits, dtype=np.float32)
+            #print("this is logits after asarray: "+str(logits))
             print(len(logits))
             print(logits.shape)
         '''
