@@ -309,6 +309,7 @@ def _inference_single_pose_model(model,
             model_version=model_version, inputs=[input0], outputs=[output0])
             logits = response.as_numpy('output')
             logits = np.asarray(logits, dtype=np.float32)
+            print(logits)
         '''
         
         logits = response.as_numpy('output')
