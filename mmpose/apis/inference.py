@@ -294,7 +294,8 @@ def _inference_single_pose_model(model,
             print(icounter)
             input=batch_data['img'][icounter]
             input0 = tritonhttpclient.InferInput(input_name[0], (3, 256, 192), 'FLOAT32')
-            input0.set_data_from_numpy(input0, binary_data=False)
+            input0 = np.expand_dims(input0, axis=0)
+            input0.set_data_from_numpy(input0)
             print(input0)
             output0 = tritonhttpclient.InferRequestedOutput(output_name,  binary_data=False)
             print(output0)
