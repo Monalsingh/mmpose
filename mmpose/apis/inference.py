@@ -307,11 +307,11 @@ def _inference_single_pose_model(model,
             #print(output0)
             response = triton_client.infer(model_name,
             model_version=model_version, inputs=[input0], outputs=[output0])
-            print(response)
+            print("this is response: "+str(response))
             logits = response.as_numpy('output')
-            print(logits)
+            print("this is logits: "+str(logits))
             logits = np.asarray(logits, dtype=np.float32)
-            print(logits)
+            print("this is logits after asarray: "+str(logits))
             print(len(logits))
             print(logits.shape)
         '''
