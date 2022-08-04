@@ -320,6 +320,7 @@ def _inference_single_pose_model(model,
             img_metas=batch_data['img_metas'],
             return_loss=False,
             return_heatmap=return_heatmap)
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         print(result)
 
     return result['preds'], result['output_heatmap']
